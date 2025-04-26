@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+void naiveStringMatching(char text[], char pattern[]) {
+ int n = strlen(text);
+ int m = strlen(pattern);
+ for (int s = 0; s <= n - m; s++) {
+ int j = 0;
+ while (j < m && text[s + j] == pattern[j]) {
+ j++;
+ }
+ if (j == m) {
+ printf("Valid shift found at index %d\n", s);
+ return;
+ }}
+ printf("No valid shift exists\n");}
+int main() {
+ char text[100], pattern[100];
+ printf("Enter the text: ");
+ scanf("%99s", text);
+ printf("Enter the pattern: ");
+ scanf("%99s", pattern);
+ naiveStringMatching(text, pattern);
+ return 0;
+}
