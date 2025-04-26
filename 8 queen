@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define MAX 100
+int board[MAX];
+void print_board(int n) {
+ static int count = 1;
+ printf("Solution %d:\n", count++);
+ for (int i = 1; i <= n; i++) {
+ for (int j = 1; j <= n; j++) {
+ if (board[i] == j)
+ printf("Q ");
+ else
+ printf(". ");
+ }
+ printf("\n");
+ }
+ printf("\n");
+}
+int place(int row, int column) {
+ for (int i = 1; i < row; i++) {
+ if (board[i] == column || abs(board[i] - column) == abs(i - row))
+ return 0;
+ }
+ return 1;
+}
+void queen(int row, int n) {
+ for (int column = 1; column <= n; column++) {
+ if (place(row, column)) {
+ board[row] = column;
+ if (row == n)
+ print_board(n);
+ else
+ queen(row + 1, n);
+ }
+ }
+}
+int main() {
+ int n;
+ printf("Enter number of queens: ");
+ scanf("%d", &n);
+ if (n < 4) {
+ printf("N should be greater than or equal to 4. No solutions exist for N < 4.\n");
+ return 1;
+ }
+ queen(1, n);
+ return 0;
+}
